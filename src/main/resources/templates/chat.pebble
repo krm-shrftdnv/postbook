@@ -1,0 +1,43 @@
+{% extends "parts/authenticated_base" %}
+{% block title %}Chat{% endblock %}
+{% block content %}
+    {% if(current.id!=dialog.member1id) %}
+        <h3>dialog.member1nickname</h3>
+    {% else %}
+        <h3>dialog.member2.nickname</h3>
+    {% endif %}
+
+    <ul id="messageArea">
+        {% for message in messages %}
+            <li><p><b>{{ message.writerNickname }}</b> : <span>{{ message.text }}</span> ---
+                    <i>{{ message.messageDateTime }}</i></p></li>
+        {% endfor %}
+    </ul>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script>
+        var webSocket;
+        function connect() {
+            webSocket = new WebSocket('ws://localhost:8080/chat');
+
+            document.cookie = 'X-Authorization=' + '12345' + ';path=/';
+
+            webSocket.onmessage = function receiveMessage(response) {
+                let data = response['data'];
+                let json = JSON.parse(data);
+                $('#messagesList').first().after("<li>" + json['from'] + ' ' + json['text'] + "</li>")
+            }
+        }
+
+        function sendMessage(text, pageId) {
+            let message = {
+                "text": text,
+                "from": pageId
+            };
+
+            webSocket.send(JSON.stringify(message));
+        }
+    </script>
+{% endblock %}

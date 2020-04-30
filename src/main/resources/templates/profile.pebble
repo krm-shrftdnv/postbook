@@ -1,0 +1,29 @@
+{% extends "parts/authenticated_base" %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+<div >
+    <h3>{{ user.nickname }}</h3>
+
+    <p>Information about user:</p>
+    <p>User's id is <b>{{ user.id }}</b></p>
+    <p>Status <b>{{ user.status }}</b></p>
+
+    {% if(current.id==user.id) %}
+    <form action="/profile/updateInformation" method="get">
+        <input type="submit" value="Update information" class="btn btn-info">
+    </form>
+    {% endif %}
+
+    <a href="/friends?id={{ user.id }}">Список братишек</a><br>
+    {% if(visiablePosts) %}
+        <a href="/profile/id{{ user.id }}/posts">Posts</a>
+    {% endif %}
+    {% if(current.id==user.id) %}
+{#        <a href="/dialogs">Диалоги</a>#}
+        <form action="/profile/newPost" method="get">
+            <input type="submit" value="New Post" class="btn btn-info">
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

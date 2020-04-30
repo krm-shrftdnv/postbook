@@ -1,0 +1,7 @@
+{% extends "parts/base" %}
+{% block content %}
+<h2>Page not found!</h2>
+<form action="/" method="get">
+    <input type="submit" value="Go to main page">
+</form>
+{% endblock %}

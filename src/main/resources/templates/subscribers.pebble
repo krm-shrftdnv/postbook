@@ -1,0 +1,10 @@
+{% extends "parts/authenticated_base" %}
+{% block title %} Subscribers {% endblock %}
+{% block content %}
+    {% for user in users %}
+        <a href="/profile/id{{ user.id }}">{{ user.nickname }}</a>
+        <form action="/friends/confirmFriendship?sender-id={{ user.id }}" method="post">
+            <input type="submit" value="Add">
+        </form>
+    {% endfor %}
+{% endblock %}

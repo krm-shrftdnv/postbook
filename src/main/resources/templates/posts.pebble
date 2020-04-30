@@ -1,0 +1,12 @@
+{% extends "parts/authenticated_base" %}
+{% block title %} Posts of {{ user.nickname }} {% endblock %}
+{% block content %}
+    {% for post in posts %}
+        <a href="/profile/id{{ post.writerId }}"><b>{{ post.writerNickname }}:</b></a><br>
+        <p>{{ post.text }}</p>
+        <i>{{ post.postDateTime }}</i>
+        <form action="/post{{ post.id }}/like" method="post">
+            <input type="submit" value="Like"><a href="/post{{ post.id }}/likers">Likers</a>
+        </form>
+    {% endfor %}
+{% endblock %}

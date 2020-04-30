@@ -1,0 +1,7 @@
+{% extends "parts/base" %}
+{% block content %}
+<h2>You shouldn't be here!</h2>
+<form action="/" method="get">
+    <input type="submit" value="Get out">
+</form>
+{% endblock %}

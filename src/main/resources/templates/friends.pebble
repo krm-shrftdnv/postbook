@@ -1,0 +1,26 @@
+{% extends "parts/authenticated_base" %}
+{% block title %}
+    Friends of {{ user.nickname }}
+{% endblock %}
+{% block content %}
+    {% for friend in friends %}
+        <a href="/profile/id{{ friend.id }}">{{ friend.nickname }}</a><br>
+{#        <a href="/dialogs/getChat?friend-id={{ friend.id }}">Write a message</a>#}
+        {% if(current.id==user.id) %}
+        <form action="/friends/breakFriendship?friend-id={{ friend.id }}" method="post">
+            <input type="submit" value="Delete friend" class="btn btn-danger">
+        </form>
+        {% endif %}
+    {% endfor %}
+    {% if(current.id==user.id) %}
+        {% if( noFriends ) %}
+            <p>You might have no friends now, go to users list to get them!</p>
+        {% endif %}
+        <form action="/friends/getNewFriends" method="get">
+            <input type="submit" value="Get new friends" class="btn btn-success">
+        </form>
+    <a href="/friends/toConfirm">Incoming Requests</a><br>
+    <a href="/friends/sentRequests">Outgoing Requests</a>
+    {% endif %}
+
+{% endblock %}

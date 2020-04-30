@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    {% block style %}{% endblock %}
+</head>
+<body>
+<header>
+    <div class="row mt-2">
+        <div class="col-4"><img src="/img/postbook_logo.png" class="img-fluid" alt="postbook"></div>
+        {% block header %} {% endblock %}
+    </div>
+</header>
+<div id="content" class="ml-5">
+    {% block content %}{% endblock %}
+</div>
+
+{#<footer>#}
+{#    <div class="text-center" style="position: absolute; margin-bottom: 0" >#}
+{#        <p>developed by KFU, itis, 11-804.</p>#}
+{#    </div>#}
+{#</footer>#}
+</body>
+</html>

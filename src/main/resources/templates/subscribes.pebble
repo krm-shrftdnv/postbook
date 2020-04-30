@@ -1,0 +1,10 @@
+{% extends "parts/authenticated_base" %}
+{% block title %} Subscribes {% endblock %}
+{% block content %}
+    {% for user in users %}
+        <a href="/profile/id{{ user.id }}">{{ user.nickname }}</a>
+        <form action="/friends/breakFriendship?friend-id={{ user.id }}" method="post">
+            <input type="submit" value="Delete subscription">
+        </form>
+    {% endfor %}
+{% endblock %}
